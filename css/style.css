@@ -1,0 +1,28 @@
+.alerta {
+	padding: 25px;
+	border: 1px solid gray;
+	border-radius: 3px;
+	margin: 10px;
+	font-size: 18px;
+}
+.error {
+	border-color: #e8273b;
+	color: #FFF;
+	background-color: #ed5565;
+}
+.sucesso {
+	border-color: #87c940;
+	color: #FFF;
+	background-color: #a0d468;
+}
+
+#btn {
+	width: 60px;
+	height: 35px;
+}
+
+img{
+	position:absolute;
+	   right: 10px;
+	   top: 10px;
+}
