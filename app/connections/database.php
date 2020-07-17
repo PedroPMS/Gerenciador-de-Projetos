@@ -59,4 +59,27 @@ class Database
         $connection = self::Conection();
         return $connection->exec("DROP DATABASE " . self::$dbname . ";");
     }
+
+    private static function getTablesClasses(): Array
+    {
+        $directory = __DIR__ . "/app/tables";
+        $directory = scandir($directory);
+        $files     = array_diff($directory, array('.', '..'));
+        
+        return str_replace(".php", "", $files);
+    }
+
+    public static function createTables(): void
+    {
+        $tables           = self::getTablesClasses();
+        $tablesNamespace  = "App\Tables\\";
+
+        foreach ($tables as $table) {
+            $tableWithNamespace = $tablesNamespace . $table;
+            
+            $table = new $tableWithNamespace();
+            $table->createTable();
+        }
+
+    }
 }
