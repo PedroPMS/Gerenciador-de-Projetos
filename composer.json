@@ -3,7 +3,16 @@
     "description": "Gerenciador de Tarefas",
     "authors": [
         {
-            "name": "Pedro"
+            "name": "Pedro",
+            "email": "p.paulo0512@gmail.com",
+            "homepage": "https://github.com/PedroPMS",
+            "role": "Gestor"
+        },
+        {
+            "name": "Erick",
+            "email": "erick_santos00@outlook.com",
+            "homepage": "https://github.com/Erivks",
+            "role": "Desenvolvedor"
         }
     ],
     "autoload": {
