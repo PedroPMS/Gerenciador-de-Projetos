@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface Tables {
+interface Table {
 
-    public function createTable(): ?\PDO;
+    public function createTable(): int;
 }
