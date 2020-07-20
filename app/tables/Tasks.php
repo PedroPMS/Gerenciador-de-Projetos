@@ -2,7 +2,7 @@
 namespace App\Tables;
 use App\Connections\Database;
 
-class Task
+class Tasks
 {
     public $conn;
     public $tableName = 'tasks';

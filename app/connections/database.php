@@ -3,7 +3,7 @@
 namespace App\Connections;
 
 use App\Tables\Users;
-use App\Tables\Task;
+use App\Tables\Tasks;
 
 class Database
 {
@@ -30,12 +30,8 @@ class Database
         if($error->getCode() == 1049){
             if(self::createSchema())
             {
-                $users = new Users;
-                $tasks = new Task;
-
-                $users->createTable();
-                $tasks->createTable();
-            }
+                self::createTables();
+            } 
         }else{
             echo $error->getMessage();
             die();
@@ -60,11 +56,16 @@ class Database
         return $connection->exec("DROP DATABASE " . self::$dbname . ";");
     }
 
-    private static function getTablesClasses(): Array
+    public static function getTablesClasses(): Array
     {
-        $directory = __DIR__ . "/app/tables";
+        $directory = __DIR__ . "/../tables";
         $directory = scandir($directory);
         $files     = array_diff($directory, array('.', '..'));
+
+        if(!$files)
+        {
+            echo 'Erro ao carregar diretório de tabelas ';
+        }
         
         return str_replace(".php", "", $files);
     }
