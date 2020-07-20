@@ -1,8 +1,10 @@
 <?php
-namespace App\Tables;
-use App\Connections\Database;
 
-class Tasks
+namespace App\Tables;
+
+use App\Connections\Database;
+use App\Interfaces\Table;
+class Tasks implements Table
 {
     public $conn;
     public $tableName = 'tasks';
@@ -12,7 +14,7 @@ class Tasks
        $this->conn = Database::Conection();
     }
 
-    public function createTable()
+    public function createTable(): int
     {
         $verify = $this->conn->exec(
             "CREATE TABLE `$this->tableName`(
