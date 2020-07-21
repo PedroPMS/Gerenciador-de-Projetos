@@ -4,13 +4,13 @@ namespace App\Interfaces;
 
 interface Model {
 
-    public static function getAll(): Array;
+    public function getAll(): Array;
 
-    public static function getByID(int $id): Array;
+    public function getByID(int $id): Array;
 
-    public static function editByID(int $id);
+    public function editByID(int $id, $data);
 
-    public static function deleteByID(int $id);
+    public function deleteByID(int $id);
 
-    public static function create(Array $data);
+    public function create(Array $data);
 }
