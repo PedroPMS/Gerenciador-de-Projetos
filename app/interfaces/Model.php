@@ -2,15 +2,16 @@
 
 namespace App\Interfaces;
 
-interface Model {
+interface Model
+{
 
-    public function getAll(): Array;
+    public function getAll(): array;
 
-    public function getByID(int $id): Array;
+    public function getByID(int $id): array;
 
     public function editByID(int $id, $data);
 
     public function deleteByID(int $id);
 
-    public function create(Array $data);
+    public function create(array $data);
 }

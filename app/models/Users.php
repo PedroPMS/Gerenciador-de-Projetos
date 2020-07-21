@@ -14,8 +14,8 @@ class Users implements Model
     {
         $this->conn = Database::Conection();
     }
- 
-    public function getAll(): Array
+
+    public function getAll(): array
     {
         try {
             $query = $this->conn->prepare("SELECT * FROM users");
@@ -26,11 +26,11 @@ class Users implements Model
         }
     }
 
-    public function getById($id): Array
+    public function getById($id): array
     {
         try {
             $query = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
-            $query->bindValue(':id',$id, PDO::PARAM_STR);
+            $query->bindValue(':id', $id, PDO::PARAM_STR);
             $query->execute();
             return ($query->fetchAll(PDO::FETCH_ASSOC));
         } catch (\PDOException $erro) {
@@ -42,9 +42,9 @@ class Users implements Model
     {
         try {
             $query = $this->conn->prepare("UPDATE users SET admin = :admin, email = :email WHERE id = :id");
-            $query->bindValue(':id',$id, PDO::PARAM_STR);
-            $query->bindValue(':email',$data['email'], PDO::PARAM_STR);
-            $query->bindValue(':admin',$data['admin'], PDO::PARAM_STR);
+            $query->bindValue(':id', $id, PDO::PARAM_STR);
+            $query->bindValue(':email', $data['email'], PDO::PARAM_STR);
+            $query->bindValue(':admin', $data['admin'], PDO::PARAM_STR);
             $query->execute();
             return $query->rowCount();
         } catch (\PDOException $erro) {
@@ -56,7 +56,7 @@ class Users implements Model
     {
         try {
             $query = $this->conn->prepare("DELETE FROM users WHERE id = :id");
-            $query->bindValue(':id',$id, PDO::PARAM_STR);
+            $query->bindValue(':id', $id, PDO::PARAM_STR);
             $query->execute();
             return $query->rowCount();
         } catch (\PDOException $erro) {
@@ -68,14 +68,13 @@ class Users implements Model
     {
         try {
             $query = $this->conn->prepare("INSERT INTO users (admin,email,password) VALUE(:email, :admin, :password)");
-            $query->bindValue(':email',$data['email'], PDO::PARAM_STR);
-            $query->bindValue(':admin',$data['admin'], PDO::PARAM_STR);
-            $query->bindValue(':password',password_hash($data['password'],PASSWORD_DEFAULT), PDO::PARAM_STR);
+            $query->bindValue(':email', $data['email'], PDO::PARAM_STR);
+            $query->bindValue(':admin', $data['admin'], PDO::PARAM_STR);
+            $query->bindValue(':password', password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
             $query->execute();
             return $query->rowCount();
         } catch (\PDOException $erro) {
             echo $erro->getMessage();
         }
     }
-
 }
