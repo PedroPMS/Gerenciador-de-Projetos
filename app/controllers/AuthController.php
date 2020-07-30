@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Connection\Database;
+use App\Connections\Database;
 use App\lib\Twig;
 
 class AuthController {
@@ -24,7 +24,7 @@ class AuthController {
         $twig       = Twig::load();
 
         $query = $connection->prepare("SELECT * FROM users WHERE email = :email");
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':email', $email, \PDO::PARAM_STR);
         $query->execute();
         if(!$query->rowCount()) {
 
