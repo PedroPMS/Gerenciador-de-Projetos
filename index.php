@@ -2,6 +2,11 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use App\Connections\Database;
+use CoffeeCode\Router\Router;
 
-var_dump(Database::Conection());
+$router = new Router(URL_BASE);
+
+$router->group(null)->namespace("App\Controllers");
+$router->get("/", "WebController:home");
+
+$router->dispatch();
