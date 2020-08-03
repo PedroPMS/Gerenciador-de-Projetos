@@ -8,7 +8,7 @@ use App\Tables\Tasks;
 class Database
 {
     public static $host = "localhost";
-    public static $dbname = "teste1";
+    public static $dbname = "teste";
     public static $port = "3306";
     public static $user = "root";
     public static $password = "";
@@ -56,7 +56,7 @@ class Database
     public static function getTablesClasses(): array
     {
         $directory = __DIR__ . "/../tables";
-        $directory = scandir($directory);
+        $directory = scandir($directory, 1);
         $files     = array_diff($directory, array('.', '..'));
 
         if (!$files) {
