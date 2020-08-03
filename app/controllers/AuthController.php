@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Connection\Database;
+use App\Connections\Database;
 use App\lib\Twig;
 
 class AuthController {
@@ -24,7 +24,7 @@ class AuthController {
         $twig       = Twig::load();
 
         $query = $connection->prepare("SELECT * FROM users WHERE email = :email");
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->bindParam(':email', $userData['email'], \PDO::PARAM_STR);
         $query->execute();
         if(!$query->rowCount()) {
 
@@ -34,9 +34,9 @@ class AuthController {
         
         } else {
 
-            $data       = $query->fetch(PDO::FETCH_ASSOC);
+            $data       = $query->fetch(\PDO::FETCH_ASSOC);
             $salt       = md5('criptofoda');
-            $password   = md5($_POST['password'] . $salt);
+            $password   = md5($userData['password'] . $salt);
 
             if($password != $data['senha']){
                 echo $twig->render('index.html', [

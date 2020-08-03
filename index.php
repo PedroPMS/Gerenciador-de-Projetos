@@ -8,5 +8,6 @@ $router = new Router(URL_BASE);
 
 $router->group(null)->namespace("App\Controllers");
 $router->get("/", "WebController:home");
+$router->post("/auth", "AuthController:login");
 
 $router->dispatch();
