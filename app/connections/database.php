@@ -8,10 +8,10 @@ use App\Tables\Tasks;
 class Database
 {
     public static $host = "localhost";
-    public static $dbname = "teste";
-    public static $port = "3308";
+    public static $dbname = "teste1";
+    public static $port = "3306";
     public static $user = "root";
-    public static $password = "secret123";
+    public static $password = "";
 
     public static function Conection()
     {
