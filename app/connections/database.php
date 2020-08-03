@@ -13,26 +13,23 @@ class Database
     public static $user = "root";
     public static $password = "";
 
-    public static function Conection ()
+    public static function Conection()
     {
-
         try {
-            $connection =  new \PDO("mysql:host=".self::$host.";dbname=".self::$dbname.";port=".self::$port, self::$user, self::$password);
+            $connection =  new \PDO("mysql:host=" . self::$host . ";dbname=" . self::$dbname . ";port=" . self::$port, self::$user, self::$password);
             return $connection;
         } catch (\PDOException $error) {
             self::verifyDatabaseExists($error);
         }
-
     }
 
     private static function verifyDatabaseExists(\PDOException $error)
     {
-        if($error->getCode() == 1049){
-            if(self::createSchema())
-            {
+        if ($error->getCode() == 1049) {
+            if (self::createSchema()) {
                 self::createTables();
-            } 
-        }else{
+            }
+        } else {
             echo $error->getMessage();
             die();
         }
@@ -40,9 +37,9 @@ class Database
 
     public static function createSchema()
     {
-        $dbname = "`".self::$dbname."`";
-        $connection =  new \PDO("mysql:host=".self::$host.";port=".self::$port, self::$user, self::$password);
-        
+        $dbname = "`" . self::$dbname . "`";
+        $connection =  new \PDO("mysql:host=" . self::$host . ";port=" . self::$port, self::$user, self::$password);
+
         try {
             return $connection->exec("CREATE DATABASE " . $dbname . ";");
         } catch (\PDOException $error) {
@@ -56,17 +53,16 @@ class Database
         return $connection->exec("DROP DATABASE " . self::$dbname . ";");
     }
 
-    public static function getTablesClasses(): Array
+    public static function getTablesClasses(): array
     {
         $directory = __DIR__ . "/../tables";
         $directory = scandir($directory);
         $files     = array_diff($directory, array('.', '..'));
 
-        if(!$files)
-        {
+        if (!$files) {
             echo 'Erro ao carregar diretório de tabelas ';
         }
-        
+
         return str_replace(".php", "", $files);
     }
 
@@ -77,10 +73,8 @@ class Database
 
         foreach ($tables as $table) {
             $tableWithNamespace = $tablesNamespace . $table;
-            
             $table = new $tableWithNamespace();
             $table->createTable();
         }
-
     }
 }

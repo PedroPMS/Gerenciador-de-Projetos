@@ -47,11 +47,7 @@ class TaskFactory
 
     private function startAndEndDate($date1, $date2)
     {
-        if (strtotime($date1) > strtotime($date2)) {
-            return [$date2,$date1];
-        }else{
-            return [$date1,$date2];
-        }
+        return strtotime($date1) > strtotime($date2) ?  [$date2,$date1] :  [$date1,$date2];
     }
 
     private function aleatoryUser()
