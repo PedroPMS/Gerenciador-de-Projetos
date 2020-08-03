@@ -1,3 +1,3 @@
 <?php
 
-define("URL_BASE", "http://localhost/Gerenciador-de-Projetos");
+define("URL_BASE", "http://localhost/html/Gerenciador-de-Projetos/");

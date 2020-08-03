@@ -66,15 +66,27 @@ class Users implements Model
 
     public function create($data)
     {
+        if($this->userExists($data['email'])){
+            return 0;
+        }
+        $admin = !isset($data['admin']) ? 0 : $data['admin'];
         try {
-            $query = $this->conn->prepare("INSERT INTO users (admin,email,password) VALUE(:email, :admin, :password)");
+            $query = $this->conn->prepare("INSERT INTO users (email, admin, password) VALUE(:email, :admin, :password)");
             $query->bindValue(':email', $data['email'], PDO::PARAM_STR);
-            $query->bindValue(':admin', $data['admin'], PDO::PARAM_STR);
+            $query->bindValue(':admin', $admin, PDO::PARAM_STR);
             $query->bindValue(':password', password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
             $query->execute();
             return $query->rowCount();
         } catch (\PDOException $erro) {
             echo $erro->getMessage();
         }
+    }
+
+    public function userExists($email)
+    {
+        $query = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
+        $query->bindValue(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+        return $query->rowCount();
     }
 }
