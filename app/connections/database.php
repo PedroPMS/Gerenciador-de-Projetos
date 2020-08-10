@@ -56,7 +56,7 @@ class Database
     public static function getTablesClasses(): array
     {
         $directory = __DIR__ . "/../tables";
-        $directory = scandir($directory);
+        $directory = scandir($directory, 1);
         $files     = array_diff($directory, array('.', '..'));
 
         if (!$files) {

@@ -20,24 +20,24 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="gerenciar.php">Gerenciar</span></a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/gerenciar">Gerenciar</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav  my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/view/read.php?userId=<?= $_SESSION['id'] ?>">Meu Perfil</a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/user/{{session.id}}">Meu Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/view/tasks.php?userId=<?= $_SESSION['id'] ?>">Minhas Tarefas</a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/tasks/{{session.id}}">Minhas Tarefas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/view/read.php?userId=<?= $_SESSION['id'] ?>">Olá, <?= $_SESSION['email'] ?></a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/user/{{session.id}}">Olá, {{ session.email }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/controllers/logout.php">Sair</a>
+                    <a class="nav-link" href="/html/Gerenciador-de-Projetos/logout">Sair</a>
                 </li>
             </ul>
         </div>

@@ -14,6 +14,11 @@
 
 <body>
     <div class="container pt-3">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
         <div class="row justify-content-center">
         <form class="form-signin" action="./cadastro" method="POST">
             <div class="form-group">

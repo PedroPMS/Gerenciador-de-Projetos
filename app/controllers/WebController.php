@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\lib\Twig;
 use App\Controllers\AuthController;
 use App\Models\Users;
+use App\Models\Tasks;
 
 class WebController {
 
@@ -18,25 +19,21 @@ class WebController {
     public function home()
     {
         if (AuthController::verifyLogin()) {
-            echo $this->twig->render('dashboard.html');
+            echo $this->twig->render('dashboard.html',[
+                'session' => $_SESSION
+            ]);
         } else {
             echo $this->twig->render('index.html');
         }
     }
-
+    
     public function register()
     {
         echo $this->twig->render('register.html');
     }
 
-    public function createUser($data)
+    public function notfound(array $data): void
     {
-        $user = new Users;
-        if($user->create($data)){
-            echo $this->twig->render('index.html');
-        }else{
-            echo $this->twig->render('register.html');
-        }
+        echo "<h3>Whoops!</h3>", "<pre>", print_r($data, true), "</pre>";
     }
-
 }

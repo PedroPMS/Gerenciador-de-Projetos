@@ -20,7 +20,6 @@ class Tasks implements Model
         try {
             $query = $this->conn->prepare("SELECT * FROM tasks");
             $query->execute();
-            print_r($query->fetchAll(PDO::FETCH_ASSOC));
             return ($query->fetchAll(PDO::FETCH_ASSOC));
         } catch (\PDOException $erro) {
             echo $erro->getMessage();
@@ -79,7 +78,6 @@ class Tasks implements Model
 
     public function create($data)
     {
-        print_r($data);
         try {
             $query = $this->conn->prepare(
                 "INSERT INTO tasks (id_user,title,description,start_date,end_date,completed)

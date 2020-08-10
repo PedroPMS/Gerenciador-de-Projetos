@@ -18,7 +18,7 @@ class Users implements Model
     public function getAll(): array
     {
         try {
-            $query = $this->conn->prepare("SELECT * FROM users");
+            $query = $this->conn->prepare("SELECT id, admin, email FROM users");
             $query->execute();
             return ($query->fetchAll(PDO::FETCH_ASSOC));
         } catch (\PDOException $erro) {
@@ -29,10 +29,10 @@ class Users implements Model
     public function getById($id): array
     {
         try {
-            $query = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
+            $query = $this->conn->prepare("SELECT id, admin, email FROM users WHERE id = :id");
             $query->bindValue(':id', $id, PDO::PARAM_STR);
             $query->execute();
-            return ($query->fetchAll(PDO::FETCH_ASSOC));
+            return ($query->fetch(PDO::FETCH_ASSOC));
         } catch (\PDOException $erro) {
             echo $erro->getMessage();
         }
